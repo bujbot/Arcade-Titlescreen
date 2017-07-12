@@ -1,0 +1,26 @@
+Game Path 1
+C:/Brushd/brushd_win.exe
+
+Game Path 2
+C:/PrepareForAdventure/PrepareForAdventure.exe
+
+Game Path 3
+C:/JohnnyWoop/JW_Win.exe
+
+Game Path 4
+C:/Splitters/Rai.exe
+
+Left Click Hovers
+true
+
+Width
+1024
+
+Height
+768
+
+Framerate
+30
+
+Music Gain
+-5
