@@ -26,10 +26,10 @@ void setup() {
   
   setupSound();
    
-  buttons[0] = new Button(200 + (iconSize / 2) + 42, 100 + (iconSize / 2) - 1, 1, imagePath + "/" + "0.png");
-  buttons[1] = new Button(screenX - 200 - (iconSize / 2) - 44, 100 + (iconSize / 2) - 1, 2, imagePath + "/" + "1.png");
-  buttons[2] = new Button(200 + (iconSize / 2) + 42, 430 + (iconSize / 2) + 7, 3, imagePath + "/" + "2.png");
-  buttons[3] = new Button(screenX - 200 - (iconSize / 2) - 44, 430 + (iconSize / 2) + 7, 4, imagePath + "/" + "3.png");
+  buttons[0] = new Button((iconSize / 2) + 242, (iconSize / 2) + 99, 1, imagePath + "/" + "0.png");
+  buttons[1] = new Button(screenX - (iconSize / 2) - 244, (iconSize / 2) + 99, 2, imagePath + "/" + "1.png");
+  buttons[2] = new Button((iconSize / 2) + 242, (iconSize / 2) + 437, 3, imagePath + "/" + "2.png");
+  buttons[3] = new Button(screenX - (iconSize / 2) - 244, (iconSize / 2) + 437, 4, imagePath + "/" + "3.png");
 
   bg = loadImage("images/bg.png");
 

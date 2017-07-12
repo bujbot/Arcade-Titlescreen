@@ -2,11 +2,11 @@ String gamePath1 = "C:/bb/bb.exe";
 String gamePath2 = "C:/PlantedGalaxy/PlantedGalaxy.exe";
 String gamePath3 = "C:/ViciousCircles/ViciousCircles.exe";
 
-boolean credit = false, coin = false; //to regulate coin situation
-int doorOpen=0; //need to check if door is open as safe guard
-int doorTimer=0;
+boolean credit = false;
+boolean coin = false; //to regulate coin situation
+int doorOpen = 0; //need to check if door is open as safe guard
+int doorTimer = 0;
 
-PImage[] icon = new PImage[3];
 PImage bg;
 PImage bg2;
 PImage insertCoin;
@@ -14,7 +14,12 @@ String imagePath = "images";
 
 int screenX = 1680;
 int screenY = 1050;
+int iconSize = 230;
 int fps = 30;
+
+int selection=2;
+
+Button[] buttons = new Button[3];
 
 int flash=0;
 int flashCount=0;
@@ -24,13 +29,6 @@ int hoverLatch=0;
 
 float ang=0;
 int rot=0;
-
-int selection=2;
-
-int iconSize = 230;
-int[] icon1={0+150,50}; //placement of icons
-int[] icon2={screenX/2-iconSize/2,50};
-int[] icon3={screenX-150-iconSize,50};
 
 //int X = screenX/2;
 //int Y = screenY/2;
@@ -50,13 +48,16 @@ void setup() {
   //fullScreen();
     
   setupSound();
-  
-  for (int k=0;k<3;k++) icon[k] = loadImage(imagePath + "/" + k+".png"); //assign image to all spots
-  noStroke();
+
+  buttons[0] = new Button((iconSize / 2) + 506, (iconSize / 2) + 528, 1, imagePath + "/" + "0.png");
+  buttons[1] = new Button((screenX / 2) + 2, (iconSize / 2) + 218, 2, imagePath + "/" + "1.png");
+  buttons[2] = new Button(screenX - (iconSize / 2) - 506, (iconSize / 2) + 528, 3, imagePath + "/" + "2.png");
   
   bg = loadImage(imagePath + "/" + "bg2.png");
   insertCoin = loadImage(imagePath + "/" + "InsertCoin.png");
   bg2 = loadImage(imagePath + "/" + "bg1.png");
+
+  noStroke();
 }
 
 void draw() {
@@ -75,29 +76,9 @@ void draw() {
   }
     
   if (credit) {   
-    pushMatrix();
-    translate(icon1[0]+iconSize/2+356,icon1[1]+iconSize/2+478);
-    if (selection==1 && credit==true) rotate(ang);
-    fill(0,0,0,108);
-    rect(-(iconSize*1.05)/2-10,-iconSize/2-20,iconSize*1.05,iconSize*1.05);
-    image(icon[0],-iconSize/2,-iconSize/2,iconSize,iconSize); //place icon 1
-    popMatrix();
-
-    pushMatrix();
-    translate(icon2[0]+iconSize/2+2,icon2[1]+iconSize/2+168);
-    if (selection==2 && credit==true) rotate(ang);
-    fill(0,0,0,108);
-    rect(-(iconSize*1.05)/2-10,-iconSize/2-20,iconSize*1.05,iconSize*1.05);
-    image(icon[1],-iconSize/2,-iconSize/2,iconSize,iconSize); //place icon 2
-    popMatrix();
-  
-    pushMatrix();
-    translate(icon3[0]+iconSize/2-356,icon3[1]+iconSize/2+478);
-    if (selection==3 && credit==true) rotate(ang);
-    fill(0,0,0,108);
-    rect(-(iconSize*1.05)/2-10,-iconSize/2-20,iconSize*1.05,iconSize*1.05);
-    image(icon[2],-iconSize/2,-iconSize/2,iconSize,iconSize); //place icon 3
-    popMatrix();
+    for (int i=0; i<buttons.length; i++) {
+      buttons[i].run();
+    }
   }
   
   //noTint();
