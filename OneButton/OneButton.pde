@@ -41,12 +41,12 @@ void draw() {
     stoppedSound = false;
     background(bg);
     
-    if (bgMusicPlay==true && bgMusicOn==false) {
+    if (bgMusicPlay && !bgMusicOn) {
       bgMusic.trigger();
-      bgMusicOn=true;
-    } else if (bgMusicPlay==false && bgMusicOn==true) {
+      bgMusicOn = true;
+    } else if (!bgMusicPlay && bgMusicOn) {
       bgMusic.stop();
-      bgMusicOn=false;
+      bgMusicOn = false;
     }
        
     for (int i=0; i<buttons.length; i++) {

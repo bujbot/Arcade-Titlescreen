@@ -1,6 +1,6 @@
-String gamePath1 = "C:/Brushd/brushd_win.exe";
-String gamePath2 = "C:/PrepareForAdventure/PrepareForAdventure.exe";
-String gamePath3 = "C:/JohnnyWoop/JW_Win.exe";
+String gamePath1 = "C:/bb/bb.exe";
+String gamePath2 = "C:/PlantedGalaxy/PlantedGalaxy.exe";
+String gamePath3 = "C:/ViciousCircles/ViciousCircles.exe";
 
 boolean credit = false, coin = false; //to regulate coin situation
 int doorOpen=0; //need to check if door is open as safe guard
@@ -35,14 +35,11 @@ int[] icon3={screenX-150-iconSize,50};
 //int X = screenX/2;
 //int Y = screenY/2;
 
-boolean Wpressed;
-boolean Spressed;
-boolean Apressed;
-boolean Dpressed;
-boolean Cpressed;
-
-boolean key1;
-boolean key2;
+//boolean Wpressed;
+//boolean Spressed;
+//boolean Apressed;
+//boolean Dpressed;
+//boolean Cpressed;
 
 Settings settings;
 
@@ -57,29 +54,27 @@ void setup() {
   for (int k=0;k<3;k++) icon[k] = loadImage(imagePath + "/" + k+".png"); //assign image to all spots
   noStroke();
   
-  bg=loadImage(imagePath + "/" + "bg2.png");
-  insertCoin=loadImage(imagePath + "/" + "InsertCoin.png");
-  bg2=loadImage(imagePath + "/" + "bg1.png");
+  bg = loadImage(imagePath + "/" + "bg2.png");
+  insertCoin = loadImage(imagePath + "/" + "InsertCoin.png");
+  bg2 = loadImage(imagePath + "/" + "bg1.png");
 }
 
 void draw() {
-  if (credit==false) {
+  if (!credit) {
     background(bg2);
   } else {
     background(bg);
   }
   
-  if (bgMusicPlay==true && bgMusicOn==false) {
+  if (bgMusicPlay && !bgMusicOn) {
     bgMusic.trigger();
-    bgMusicOn=true;
-  } else if (bgMusicPlay==false && bgMusicOn==true) {
+    bgMusicOn = true;
+  } else if (!bgMusicPlay && bgMusicOn) {
     bgMusic.stop();
-    bgMusicOn=false;
+    bgMusicOn = false;
   }
     
-  //if (credit==false) tint(150,150);was here before to make the image look like a ghost
-  
-  if (credit==true){   
+  if (credit) {   
     pushMatrix();
     translate(icon1[0]+iconSize/2+356,icon1[1]+iconSize/2+478);
     if (selection==1 && credit==true) rotate(ang);
@@ -87,8 +82,7 @@ void draw() {
     rect(-(iconSize*1.05)/2-10,-iconSize/2-20,iconSize*1.05,iconSize*1.05);
     image(icon[0],-iconSize/2,-iconSize/2,iconSize,iconSize); //place icon 1
     popMatrix();
-  }
-  if (credit==true){   
+
     pushMatrix();
     translate(icon2[0]+iconSize/2+2,icon2[1]+iconSize/2+168);
     if (selection==2 && credit==true) rotate(ang);
@@ -96,8 +90,7 @@ void draw() {
     rect(-(iconSize*1.05)/2-10,-iconSize/2-20,iconSize*1.05,iconSize*1.05);
     image(icon[1],-iconSize/2,-iconSize/2,iconSize,iconSize); //place icon 2
     popMatrix();
-  }  
-  if (credit==true){    
+  
     pushMatrix();
     translate(icon3[0]+iconSize/2-356,icon3[1]+iconSize/2+478);
     if (selection==3 && credit==true) rotate(ang);
@@ -107,7 +100,7 @@ void draw() {
     popMatrix();
   }
   
-  noTint();
+  //noTint();
   
   if (rot==0) ang=ang+0.005;
   if (rot==1) ang=ang-0.005;
@@ -115,7 +108,7 @@ void draw() {
   if (ang<=-0.02) rot=0;
   
   //=====================flashing insert coin
-  if (credit==false){
+  if (!credit){
       if (flash==1) {
         pushMatrix();
         translate(0,0);
@@ -124,38 +117,41 @@ void draw() {
       }
        
       if (flashCount==10){
-        if (flash==0) flash=1;
-        else flash=0;
-        flashCount=0;
+        if (flash==0) {
+          flash = 1;
+        } else {
+          flash = 0;
+        }
+        flashCount = 0;
       }  
       flashCount++;
   }
   //======================door status
-  if (doorOpen==1){
+  if (doorOpen == 1){
     doorTimer++; 
   }
-  if (doorTimer>=60){
-    doorOpen=0;
-    doorTimer=0;
-    if (credit==false) {
+  if (doorTimer >= 60){
+    doorOpen = 0;
+    doorTimer = 0;
+    if (!credit) {
       coinFx.trigger();
-      bgMusicPlay=true;
+      bgMusicPlay = true;
     }  
-    credit=true;
+    credit = true;
   }
   
   //====================game start
-  if (key1==true && key2==true && credit==true){
+  if (key1 && key2 && credit) {
     clickFx.trigger();
-    bgMusicPlay=false; //turns off bg music if a program is launched
-    credit=false; //you used your credit!
-    key1=false;
-    key2=false;
+    bgMusicPlay = false; //turns off bg music if a program is launched
+    credit = false; //you used your credit!
+    key1 = false;
+    key2 = false;
     bgMusic.stop();
-    if (selection==1) launch("C:/bb/bb.exe"); //change as necessary
-    if (selection==2) launch("C:/PlantedGalaxy/PlantedGalaxy.exe"); //change as necessary
-    if (selection==3) launch("C:/ViciousCircles/ViciousCircles.exe"); //change as necessary  
-    delay (1000);
+    if (selection == 1) launch("C:/bb/bb.exe"); //change as necessary
+    if (selection == 2) launch("C:/PlantedGalaxy/PlantedGalaxy.exe"); //change as necessary
+    if (selection == 3) launch("C:/ViciousCircles/ViciousCircles.exe"); //change as necessary  
+    delay(1000);
   }
    
 }

@@ -1,23 +1,17 @@
 Game Path 1
-C:/Brushd/brushd_win.exe
+C:/bb/bb.exe
 
 Game Path 2
-C:/PrepareForAdventure/PrepareForAdventure.exe
+C:/PlantedGalaxy/PlantedGalaxy.exe
 
 Game Path 3
-C:/JohnnyWoop/JW_Win.exe
-
-Game Path 4
-C:/Splitters/Rai.exe
-
-Left Click Hovers
-true
+C:/ViciousCircles/ViciousCircles.exe
 
 Width
-1024
+1680
 
 Height
-768
+1050
 
 Framerate
 30
