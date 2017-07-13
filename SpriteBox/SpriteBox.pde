@@ -31,10 +31,11 @@ Settings settings;
 
 void setup() {
   settings = new Settings("settings.txt");
-  size(1680, 1050); //MAKE SURE THIS MATCHES "screenX" & "screenY" up above
+  surface.setSize(screenX, screenY); //MAKE SURE THIS MATCHES "screenX" & "screenY" up above
   frameRate(fps);
-  //fullScreen();
-    
+  fullScreen();
+  noCursor();
+  
   setupSound();
 
   buttons[0] = new Button((iconSize / 2) + 506, (iconSize / 2) + 528, 1, imagePath + "/" + "0.png");
