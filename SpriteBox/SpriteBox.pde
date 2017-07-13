@@ -27,18 +27,6 @@ int flashCount=0;
 int hover=0;
 int hoverLatch=0;
 
-float ang=0;
-int rot=0;
-
-//int X = screenX/2;
-//int Y = screenY/2;
-
-//boolean Wpressed;
-//boolean Spressed;
-//boolean Apressed;
-//boolean Dpressed;
-//boolean Cpressed;
-
 Settings settings;
 
 void setup() {
@@ -61,79 +49,86 @@ void setup() {
 }
 
 void draw() {
-  if (!credit) {
-    background(bg2);
-  } else {
-    background(bg);
-  }
-  
-  if (bgMusicPlay && !bgMusicOn) {
-    bgMusic.trigger();
-    bgMusicOn = true;
-  } else if (!bgMusicPlay && bgMusicOn) {
-    bgMusic.stop();
-    bgMusicOn = false;
-  }
-    
-  if (credit) {   
-    for (int i=0; i<buttons.length; i++) {
-      buttons[i].run();
+  if (focused) {
+    if (stoppedSound) {
+      stoppedSound = false;
     }
-  }
-  
-  //noTint();
-  
-  if (rot==0) ang=ang+0.005;
-  if (rot==1) ang=ang-0.005;
-  if (ang>=0.02) rot=1;
-  if (ang<=-0.02) rot=0;
-  
-  //=====================flashing insert coin
-  if (!credit){
-      if (flash==1) {
-        pushMatrix();
-        translate(0,0);
-        image(insertCoin,0,0); //insert coin logo
-        popMatrix();
-      }
-       
-      if (flashCount==10){
-        if (flash==0) {
-          flash = 1;
-        } else {
-          flash = 0;
-        }
-        flashCount = 0;
-      }  
-      flashCount++;
-  }
-  //======================door status
-  if (doorOpen == 1){
-    doorTimer++; 
-  }
-  if (doorTimer >= 60){
-    doorOpen = 0;
-    doorTimer = 0;
+    
     if (!credit) {
-      coinFx.trigger();
-      bgMusicPlay = true;
-    }  
-    credit = true;
+      background(bg2);
+    } else {
+      background(bg);
+    }
+    
+    if (bgMusicPlay && !bgMusicOn) {
+      bgMusic.trigger();
+      bgMusicOn = true;
+    } else if (!bgMusicPlay && bgMusicOn) {
+      bgMusic.stop();
+      bgMusicOn = false;
+    }
+      
+    if (credit) {   
+      for (int i=0; i<buttons.length; i++) {
+        buttons[i].run();
+      }
+    }
+    
+    //=====================flashing insert coin
+    if (!credit){
+        if (flash==1) {
+          pushMatrix();
+          translate(0,0);
+          image(insertCoin,0,0); //insert coin logo
+          popMatrix();
+        }
+         
+        if (flashCount==10){
+          if (flash==0) {
+            flash = 1;
+          } else {
+            flash = 0;
+          }
+          flashCount = 0;
+        }  
+        flashCount++;
+    }
+    
+    //======================door status
+    if (doorOpen == 1){
+      doorTimer++; 
+    }
+    
+    if (doorTimer >= 60){
+      doorOpen = 0;
+      doorTimer = 0;
+      if (!credit) {
+        coinFx.trigger();
+        bgMusicPlay = true;
+      }  
+      credit = true;
+    }
+    
+    //====================game start
+    if (key1 && key2 && credit) {
+      clickFx.trigger();
+      bgMusicPlay = false; //turns off bg music if a program is launched
+      credit = false; //you used your credit!
+      key1 = false;
+      key2 = false;
+      bgMusic.stop();
+      if (selection == 1) launcher(gamePath1);
+      if (selection == 2) launcher(gamePath2);
+      if (selection == 3) launcher(gamePath3);  
+      delay(1000);
+    }
+  } else if (!focused && !stoppedSound) {
+    stopSound();
   }
-  
-  //====================game start
-  if (key1 && key2 && credit) {
-    clickFx.trigger();
-    bgMusicPlay = false; //turns off bg music if a program is launched
-    credit = false; //you used your credit!
-    key1 = false;
-    key2 = false;
-    bgMusic.stop();
-    if (selection == 1) launch("C:/bb/bb.exe"); //change as necessary
-    if (selection == 2) launch("C:/PlantedGalaxy/PlantedGalaxy.exe"); //change as necessary
-    if (selection == 3) launch("C:/ViciousCircles/ViciousCircles.exe"); //change as necessary  
-    delay(1000);
-  }
-   
+}
+
+void launcher(String path) {
+  println(selection + ". " + path);
+  launch(path);
 }
   

@@ -19,7 +19,7 @@ void mousePressed(){
       hoverFx.trigger();
       selection++;
       if (selection > 4) selection = 1;
-      if (!bgMusicPlay) bgMusicPlay=true;
+      bgMusicPlay=true;
     }
       
     if (clickButton) {
@@ -32,9 +32,4 @@ void mousePressed(){
       if (selection == 4) launcher(gamePath4);
     }
   }
-}
-
-void launcher(String path) {
-  println(selection + ". " + path);
-  launch(path);
 }

@@ -38,7 +38,10 @@ void setup() {
 
 void draw() {
   if (focused) {
-    stoppedSound = false;
+    if (stoppedSound) {
+      stoppedSound = false;
+    }
+    
     background(bg);
     
     if (bgMusicPlay && !bgMusicOn) {
@@ -56,5 +59,10 @@ void draw() {
   } else if (!focused && !stoppedSound) {
     stopSound();
   }
+}
+
+void launcher(String path) {
+  println(selection + ". " + path);
+  launch(path);
 }
     
