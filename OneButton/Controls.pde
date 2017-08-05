@@ -1,6 +1,8 @@
 boolean leftClickHovers = true;
 boolean hoverButton = false;
 boolean clickButton = false;
+int lastLaunch = 0;
+int minTimeBetweenLaunch = 5000; // ms
 
 void mousePressed(){
   hoverButton = false;
@@ -22,7 +24,8 @@ void mousePressed(){
       bgMusicPlay=true;
     }
       
-    if (clickButton) {
+    if (clickButton && millis() - lastLaunch > minTimeBetweenLaunch) {
+      lastLaunch = millis();
       clickFx.trigger();
       bgMusicPlay=false;
       
