@@ -27,6 +27,9 @@ int flashCount=0;
 int hover=0;
 int hoverLatch=0;
 
+int lastLaunch = 0;
+int launchSeparation = 5000; // ms: set to longest time that a game takes to launch
+
 Settings settings;
 
 void setup() {
@@ -111,17 +114,18 @@ void draw() {
     }
     
     //====================game start
-    if (key1 && key2 && credit) {
+    int now = millis();
+    if (key1 && key2 && credit && now - lastLaunch >= launchSeparation) {
       clickFx.trigger();
       bgMusicPlay = false; //turns off bg music if a program is launched
       credit = false; //you used your credit!
+      lastLaunch = now;
       key1 = false;
       key2 = false;
       bgMusic.stop();
       if (selection == 1) launcher(gamePath1);
       if (selection == 2) launcher(gamePath2);
-      if (selection == 3) launcher(gamePath3);  
-      delay(1000);
+      if (selection == 3) launcher(gamePath3);
     }
   } else if (!focused && !stoppedSound) {
     stopSound();

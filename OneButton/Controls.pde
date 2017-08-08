@@ -2,7 +2,7 @@ boolean leftClickHovers = true;
 boolean hoverButton = false;
 boolean clickButton = false;
 int lastLaunch = 0;
-int minTimeBetweenLaunch = 5000; // ms
+int launchSeparation = 5000; // ms: set to longest time that a game takes to launch
 
 void mousePressed(){
   hoverButton = false;
@@ -24,8 +24,11 @@ void mousePressed(){
       bgMusicPlay=true;
     }
       
-    if (clickButton && millis() - lastLaunch > minTimeBetweenLaunch) {
-      lastLaunch = millis();
+    int now = millis();
+    // prevent launches happening too quickly
+    // NOTE: this is to prevent a double launch if focused = true (incorrectly) after a launch
+    if (clickButton && now - lastLaunch >= launchSeparation) {
+      lastLaunch = now;
       clickFx.trigger();
       bgMusicPlay=false;
       
