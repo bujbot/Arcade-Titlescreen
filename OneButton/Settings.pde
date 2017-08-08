@@ -15,6 +15,7 @@ class Settings {
         if (data[i].equals("Height")) screenY = setInt(data[i+1]);
         if (data[i].equals("Framerate")) fps = setInt(data[i+1]);
         if (data[i].equals("Music Gain")) gain = setFloat(data[i+1]);
+        if (data[i].equals("Launch Separation")) launchSeparation = setInt(data[i+1]);
       }
     } catch(Exception e) {
       println("Couldn't load settings file. Using defaults.");
